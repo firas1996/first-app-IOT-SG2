@@ -4,7 +4,7 @@ import React from "react";
 const ContactItem = () => {
   return (
     <View style={styles.item}>
-      <Text>ContactItem</Text>
+      <Text style={styles.txt}>ContactItem</Text>
     </View>
   );
 };
@@ -21,5 +21,11 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "space-evenly",
     marginBottom: 8,
+    alignSelf: "center",
+  },
+  txt: {
+    color: "white",
+    fontSize: 21,
+    fontWeight: "bold",
   },
 });

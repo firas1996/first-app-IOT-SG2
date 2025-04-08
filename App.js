@@ -46,9 +46,7 @@ export default function App() {
         <FlatList
           style={{
             width: "100%",
-            backgroundColor: "green",
           }}
-          alignItems="center"
           data={DATA}
           renderItem={({ item }) => <ContactItem title={item} />}
         />
@@ -86,7 +84,6 @@ const styles = StyleSheet.create({
     width: "100%",
     flex: 7,
     alignItems: "center",
-    backgroundColor: "red",
   },
   btn: {
     backgroundColor: "red",
