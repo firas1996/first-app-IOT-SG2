@@ -16,7 +16,7 @@ export default function App() {
   const [DATA, setDATA] = useState([]);
   const addItem = () => {
     if (imp.trim().length > 0) {
-      setDATA([...DATA, { id: Math.random(), name: imp }]);
+      setDATA([...DATA, { id: Math.random(), name: imp, isFav: false }]);
       setImp("");
     }
     console.log(DATA);
