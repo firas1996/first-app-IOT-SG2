@@ -21,6 +21,13 @@ export default function App() {
     }
     console.log(DATA);
   };
+  const updateItem = (id) => {
+    setDATA(
+      DATA.map((item) => {
+        return item.id === id ? { ...item, isFav: !item.isFav } : item;
+      })
+    );
+  };
   const changeImp = (txt) => {
     console.log("imp: ", imp);
     setImp(txt);
@@ -47,7 +54,12 @@ export default function App() {
           }}
           data={DATA}
           renderItem={({ item }) => (
-            <ContactItem key={item.id} name={item.name} />
+            <ContactItem
+              id={item.id}
+              name={item.name}
+              isFav={item.isFav}
+              updateItem={updateItem}
+            />
           )}
         />
       </View>

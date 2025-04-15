@@ -1,16 +1,21 @@
 import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import MaterialIcons from "@expo/vector-icons/MaterialIcons";
 
-const ContactItem = ({ name }) => {
-  // const {name}=props
+const ContactItem = ({ name, isFav, id, updateItem }) => {
   return (
     <View style={styles.item}>
       <Text style={styles.txt}>{name}</Text>
-      <TouchableOpacity>
-        <MaterialIcons name="favorite-border" size={28} color="yellow" />
+      <TouchableOpacity
+        onPress={() => {
+          updateItem(id);
+        }}
+      >
+        <MaterialIcons
+          name={isFav ? "favorite" : "favorite-border"}
+          size={28}
+          color={isFav ? "red" : "white"}
+        />
       </TouchableOpacity>
-
-      {/* <MaterialIcons name="favorite" size={28} color="yellow" /> */}
     </View>
   );
 };
