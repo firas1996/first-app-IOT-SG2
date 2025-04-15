@@ -11,7 +11,18 @@ import {
 import ContactItem from "./src/components/ContactItem";
 import { useState } from "react";
 
+///////////////////////////////////////////////////////////////////////
+import "./gesture-handler.native";
+import { NavigationContainer } from "@react-navigation/native";
+import { createStackNavigator } from "@react-navigation/stack";
+import Home from "./src/screens/Home";
+import Fav from "./src/screens/Fav";
+import { createDrawerNavigator } from "@react-navigation/drawer";
+///////////////////////////////////////////////////////////////////////
+
 export default function App() {
+  const Stack = createStackNavigator();
+  const Drawer = createDrawerNavigator();
   const [imp, setImp] = useState("");
   const [DATA, setDATA] = useState([]);
   const addItem = () => {
@@ -35,35 +46,41 @@ export default function App() {
     console.log("imp: ", imp);
   };
   return (
-    <View style={styles.container}>
-      <View style={styles.v1}>
-        <TextInput
-          style={styles.input}
-          placeholder="Title"
-          value={imp}
-          onChangeText={changeImp}
-        />
-        <TouchableOpacity style={styles.btn} onPress={addItem}>
-          <Text style={styles.btnTXT}>Add</Text>
-        </TouchableOpacity>
-      </View>
-      <View style={styles.v2}>
-        <FlatList
-          style={{
-            width: "100%",
-          }}
-          data={DATA}
-          renderItem={({ item }) => (
-            <ContactItem
-              id={item.id}
-              name={item.name}
-              isFav={item.isFav}
-              updateItem={updateItem}
-            />
-          )}
-        />
-      </View>
-    </View>
+    <NavigationContainer>
+      <Drawer.Navigator>
+        <Drawer.Screen name="Home" component={Home} />
+        <Drawer.Screen name="Fav" component={Fav} />
+      </Drawer.Navigator>
+    </NavigationContainer>
+    // <View style={styles.container}>
+    //   <View style={styles.v1}>
+    //     <TextInput
+    //       style={styles.input}
+    //       placeholder="Title"
+    //       value={imp}
+    //       onChangeText={changeImp}
+    //     />
+    //     <TouchableOpacity style={styles.btn} onPress={addItem}>
+    //       <Text style={styles.btnTXT}>Add</Text>
+    //     </TouchableOpacity>
+    //   </View>
+    //   <View style={styles.v2}>
+    //     <FlatList
+    //       style={{
+    //         width: "100%",
+    //       }}
+    //       data={DATA}
+    //       renderItem={({ item }) => (
+    //         <ContactItem
+    //           id={item.id}
+    //           name={item.name}
+    //           isFav={item.isFav}
+    //           updateItem={updateItem}
+    //         />
+    //       )}
+    //     />
+    //   </View>
+    // </View>
   );
 }
 
