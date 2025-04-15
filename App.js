@@ -9,36 +9,34 @@ import {
   View,
 } from "react-native";
 import ContactItem from "./src/components/ContactItem";
+import { useState } from "react";
 
 export default function App() {
-  const DATA = [
-    "aaaa",
-    "aaaa",
-    "aaaa",
-    "aaaa",
-    "aaaa",
-    "aaaa",
-    "aaaa",
-    "aaaa",
-    "aaaa",
-    "aaaa",
-    "aaaa",
-    "aaaa",
-    "aaaa",
-    "aaaa",
-    "aaaa",
-    "aaaa",
-    "aaaa",
-    "aaaa",
-    "aaaa",
-    "aaaa",
-    "aaaa",
-  ];
+  const [imp, setImp] = useState("");
+  const [DATA, setDATA] = useState([]);
+  const addItem = () => {
+    if (imp.trim().length > 0) {
+      setDATA([...DATA, { id: Math.random(), name: imp }]);
+      setImp("");
+    }
+    console.log(DATA);
+  };
+  const changeImp = (txt) => {
+    console.log("imp: ", imp);
+    setImp(txt);
+    console.log("txt: ", txt);
+    console.log("imp: ", imp);
+  };
   return (
     <View style={styles.container}>
       <View style={styles.v1}>
-        <TextInput style={styles.input} placeholder="Title" />
-        <TouchableOpacity style={styles.btn}>
+        <TextInput
+          style={styles.input}
+          placeholder="Title"
+          value={imp}
+          onChangeText={changeImp}
+        />
+        <TouchableOpacity style={styles.btn} onPress={addItem}>
           <Text style={styles.btnTXT}>Add</Text>
         </TouchableOpacity>
       </View>
@@ -48,7 +46,9 @@ export default function App() {
             width: "100%",
           }}
           data={DATA}
-          renderItem={({ item }) => <ContactItem title={item} />}
+          renderItem={({ item }) => (
+            <ContactItem key={item.id} name={item.name} />
+          )}
         />
       </View>
     </View>
