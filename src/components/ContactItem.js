@@ -1,7 +1,10 @@
 import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import MaterialIcons from "@expo/vector-icons/MaterialIcons";
+import { useContext } from "react";
+import FavStore from "../store/FavContext";
 
-const ContactItem = ({ name, isFav, id, updateItem }) => {
+const ContactItem = ({ name, isFav, id }) => {
+  const { updateItem } = useContext(FavStore);
   return (
     <View style={styles.item}>
       <Text style={styles.txt}>{name}</Text>

@@ -7,28 +7,15 @@ import {
   TouchableOpacity,
   View,
 } from "react-native";
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { useNavigation } from "@react-navigation/native";
 import ContactItem from "../components/ContactItem";
+import FavStore from "../store/FavContext";
 
 const Home = () => {
   const navigation = useNavigation();
   const [imp, setImp] = useState("");
-  const [DATA, setDATA] = useState([]);
-  const addItem = () => {
-    if (imp.trim().length > 0) {
-      setDATA([...DATA, { id: Math.random(), name: imp, isFav: false }]);
-      setImp("");
-    }
-    console.log(DATA);
-  };
-  const updateItem = (id) => {
-    setDATA(
-      DATA.map((item) => {
-        return item.id === id ? { ...item, isFav: !item.isFav } : item;
-      })
-    );
-  };
+  const { DATA, addItem } = useContext(FavStore);
   const changeImp = (txt) => {
     console.log("imp: ", imp);
     setImp(txt);
@@ -44,7 +31,13 @@ const Home = () => {
           value={imp}
           onChangeText={changeImp}
         />
-        <TouchableOpacity style={styles.btn} onPress={addItem}>
+        <TouchableOpacity
+          style={styles.btn}
+          onPress={() => {
+            addItem(imp);
+            setImp("");
+          }}
+        >
           <Text style={styles.btnTXT}>Add</Text>
         </TouchableOpacity>
       </View>
@@ -55,12 +48,7 @@ const Home = () => {
           }}
           data={DATA}
           renderItem={({ item }) => (
-            <ContactItem
-              id={item.id}
-              name={item.name}
-              isFav={item.isFav}
-              updateItem={updateItem}
-            />
+            <ContactItem id={item.id} name={item.name} isFav={item.isFav} />
           )}
         />
       </View>
