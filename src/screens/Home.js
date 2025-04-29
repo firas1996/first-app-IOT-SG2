@@ -1,6 +1,15 @@
-import { Button, StyleSheet, Text, View } from "react-native";
+import {
+  Button,
+  FlatList,
+  StyleSheet,
+  Text,
+  TextInput,
+  TouchableOpacity,
+  View,
+} from "react-native";
 import React, { useState } from "react";
 import { useNavigation } from "@react-navigation/native";
+import ContactItem from "../components/ContactItem";
 
 const Home = () => {
   const navigation = useNavigation();
