@@ -11,6 +11,7 @@ import React, { useContext, useState } from "react";
 import { useNavigation } from "@react-navigation/native";
 import ContactItem from "../components/ContactItem";
 import FavStore from "../store/FavContext";
+import Ccc from "../components/aaa";
 
 const Home = () => {
   const navigation = useNavigation();
@@ -24,6 +25,7 @@ const Home = () => {
   };
   return (
     <View style={styles.container}>
+      {/* <Ccc /> */}
       <View style={styles.v1}>
         <TextInput
           style={styles.input}
