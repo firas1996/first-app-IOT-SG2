@@ -2,19 +2,51 @@ import { Button, StyleSheet, Text, TextInput, View } from "react-native";
 import React, { useState } from "react";
 import axios from "axios";
 
+///////////////////////////////////////
+import "firebase/firestore";
+import Firebase from "../../Firebase";
+import {
+  getAuth,
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
+} from "firebase/auth";
+
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const testLogin = () => {
-    axios
-      .post("http://10.33.1.4:1234/users/signin", { email, password })
-      .then((res) => {
-        console.log(res.data);
+    const auth = getAuth();
+    createUserWithEmailAndPassword(auth, email, password)
+      .then((userCredential) => {
+        // Signed up
+        const user = userCredential.user;
+        console.log("user created : " + user);
       })
       .catch((error) => {
-        setError(error.message);
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        console.log("Fail: " + errorMessage);
       });
+
+    // try {
+    //   const res = await axios.post("http://10.33.1.4:1234/users/signin", {
+    //     email,
+    //     password,
+    //   });
+    //   console.log(res.data);
+    // } catch (error) {
+    //   setError(error);
+    // }
+
+    // axios
+    //   .post("http://10.33.1.4:1234/users/signin", { email, password })
+    //   .then((res) => {
+    //     console.log(res.data);
+    //   })
+    //   .catch((error) => {
+    //     setError(error.message);
+    //   });
   };
   return (
     <View style={styles.container}>
