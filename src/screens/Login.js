@@ -1,14 +1,24 @@
 import { Button, StyleSheet, Text, TextInput, View } from "react-native";
 import React, { useState } from "react";
+import axios from "axios";
 
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
-  const testLogin = () => {};
+  const testLogin = () => {
+    axios
+      .post("http://10.33.1.4:1234/users/signin", { email, password })
+      .then((res) => {
+        console.log(res.data);
+      })
+      .catch((error) => {
+        setError(error.message);
+      });
+  };
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Sign Up</Text>
+      <Text style={styles.title}>Sign In</Text>
       {error && <Text style={styles.error}>{error}</Text>}
       <TextInput
         style={styles.input}
