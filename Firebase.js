@@ -5,7 +5,6 @@ import { initializeApp } from "firebase/app";
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
-  apiKey: "AIzaSyDXS3F3cnaFAof2nora2IrZL_vP7MnThdE",
   authDomain: "iot-sg1.firebaseapp.com",
   projectId: "iot-sg1",
   storageBucket: "iot-sg1.firebasestorage.app",
